@@ -1,26 +1,520 @@
-@import "tailwindcss";
+/* =========================================
+   BRASS MOON — DIGITAL MENU
+   ========================================= */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Main menu canvas */
+.menu-canvas {
+  position: relative;
+  width: min(100vw, 177.78vh);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Illustrator background artwork */
+.menu-background {
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/brass-moon-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* =========================================
+   MENU OVERLAY
+   ========================================= */
+
+.menu-content {
+  position: absolute;
+  inset: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+}
+
+/* Menu section positions */
+.coffee-position {
+  position: absolute;
+  top: 7%;
+  left: 3%;
+  width: 33%;
+}
+
+.espresso-position {
+  position: absolute;
+  top: 38%;
+  left: 3%;
+  width: 33%;
+}
+
+.noncoffee-position {
+  position: absolute;
+  top: 7%;
+  right: 3%;
+  width: 33%;
+}
+
+.syrups-position {
+  position: absolute;
+  top: 65%;
+  left: 41%;
+  width: 30%;
+}
+
+.addons-position {
+  position: absolute;
+  top: 65%;
+  right: 4%;
+  width: 23%;
+}
+
+/* =========================================
+   SECTION HEADINGS
+   ========================================= */
+
+.menu-section-title {
+  margin: 0 0 1.4rem;
+  color: #f0ba70;
+  font-family: Georgia, serif;
+  font-size: clamp(22px, 2.8vw, 54px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+/* Bottom section headings */
+.syrups-position .menu-section-title {
+  font-size: clamp(20px, 2.1vw, 40px);
+  letter-spacing: 0;
+  white-space: nowrap;
+  margin-bottom: 1.2rem;
+}
+
+.addons-position .menu-section-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: clamp(20px, 2.1vw, 40px);
+  letter-spacing: 0;
+  white-space: nowrap;
+  margin-bottom: 1.2rem;
+}
+
+/* =========================================
+   MENU ITEMS AND PRICES
+   ========================================= */
+
+.menu-section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.menu-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 0.3rem;
+}
+
+.menu-item-name {
+  font-size: clamp(14px, 1.7vw, 34px);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.menu-item-prices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 0.35rem;
+  width: 9rem;
+  flex-shrink: 0;
+}
+
+.menu-price {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.menu-price-dollars {
+  font-size: clamp(14px, 1.7vw, 34px);
+}
+
+.menu-price-cents {
+  font-size: clamp(9px, 0.9vw, 18px);
+  margin-top: 0.1em;
+}
+
+/* =========================================
+   SYRUPS AND ADD-ONS
+   ========================================= */
+
+.menu-description {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(14px, 1.65vw, 32px);
+  font-weight: 700;
+  line-height: 1.35;
+  color: #ffffff;
+}
+
+.syrups-position .menu-description,
+.addons-position .menu-description {
+  font-size: clamp(14px, 1.65vw, 30px);
+  line-height: 1.35;
+  text-transform: lowercase;
+}
+
+.addons-price {
+  margin-left: 0;
+  font-size: 1em;
+  white-space: nowrap;
+}
+
+/* Admin dashboard */
+.admin-container {
+  min-height: 100vh;
+  padding: 32px;
+  background: #111111;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-y: auto;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.admin-header h1 {
+  margin: 0 0 8px;
+  color: #f0ba70;
+}
+
+.admin-header p {
+  margin: 0;
+  color: #aaaaaa;
+}
+
+.admin-header a {
+  color: #f0ba70;
+}
+
+.admin-section {
+  margin-bottom: 24px;
+  padding: 20px;
+  border: 1px solid #444444;
+  border-radius: 8px;
+}
+
+.admin-section h2 {
+  margin: 0 0 16px;
+  color: #f0ba70;
+}
+
+.admin-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid #333333;
+}
+
+.admin-prices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #cccccc;
+}
+
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-signout {
+  padding: 10px 16px;
+  border: 1px solid #755534;
+  border-radius: 6px;
+  background: #24201c;
+  color: #f0ba70;
+  font: inherit;
+  cursor: pointer;
+}
+
+.admin-signout:hover {
+  background: #36291e;
+}
+
+/* =========================================
+   ADMIN MENU EDITOR
+   ========================================= */
+
+.admin-edit-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #333;
+}
+
+.admin-edit-fields {
+  display: flex;
+  align-items: end;
+  gap: 16px;
+}
+
+.admin-edit-name {
+  flex: 1;
+  min-width: 180px;
+}
+
+.admin-edit-name,
+.admin-edit-prices label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-edit-name span,
+.admin-edit-prices label span {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.admin-edit-fields input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background: #1c1c1c;
+  color: #fff;
+  font: inherit;
+}
+
+.admin-edit-fields input:focus {
+  outline: 2px solid #f0ba70;
+  outline-offset: 1px;
+}
+
+.admin-edit-prices {
+  display: flex;
+  gap: 10px;
+}
+
+.admin-edit-prices label {
+  width: 95px;
+}
+
+.admin-save-button {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 5px;
+  background: #f0ba70;
+  color: #17110a;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-save-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.admin-edit-message {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+
+.admin-edit-message.success {
+  color: #7bd79b;
+}
+
+.admin-edit-message.error {
+  color: #ff8787;
+}
+
+@media (max-width: 800px) {
+  .admin-edit-fields {
+    flex-wrap: wrap;
+  }
+
+  .admin-edit-name {
+    flex-basis: 100%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* =========================================
+   ADMIN PUBLISH CONTROLS
+   ========================================= */
+
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.admin-publish {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-version {
+  padding: 8px 12px;
+  background: #252525;
+  border: 1px solid #555;
+  border-radius: 6px;
+  color: #ddd;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.admin-publish-button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: #f0ba70;
+  color: #17110a;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.admin-publish-button:hover:not(:disabled) {
+  background: #ffd095;
+}
+
+.admin-publish-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Publish notifications */
+
+.admin-publish-toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 6px 24px #0008;
+}
+
+.admin-publish-toast.success {
+  background: #23613e;
+}
+
+.admin-publish-toast.error {
+  background: #8c3030;
+}
+
+.admin-publish-toast button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Product availability */
+
+.admin-product-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #333;
+}
+
+.admin-product-row .admin-edit-item {
+  flex: 1;
+  min-width: 0;
+  border-bottom: none;
+}
+
+.admin-availability {
+  flex-shrink: 0;
+}
+
+.availability-button {
+  min-width: 110px;
+  padding: 10px 12px;
+  border: 1px solid;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.availability-button.available {
+  background: #163c29;
+  border-color: #368657;
+  color: #91e6ae;
+}
+
+.availability-button.unavailable {
+  background: #442323;
+  border-color: #a44c4c;
+  color: #ffaaaa;
+}
+
+.availability-button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.admin-availability-toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  color: #fff;
+  box-shadow: 0 6px 24px #0008;
+}
+
+.admin-availability-toast.success {
+  background: #23613e;
+}
+
+.admin-availability-toast.error {
+  background: #8c3030;
+}
+
+.admin-availability-toast button {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .admin-product-row {
+    flex-wrap: wrap;
+    padding-bottom: 12px;
+  }
 }
