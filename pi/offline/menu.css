@@ -1,0 +1,219 @@
+/* =========================================
+   BRASS MOON — OFFLINE DIGITAL MENU
+   Raspberry Pi 400
+   ========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #080808;
+}
+
+html,
+body,
+.menu-screen,
+.menu-canvas {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.menu-screen::-webkit-scrollbar,
+.menu-canvas::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================================
+   FULLSCREEN 16:9 CANVAS
+   ========================================= */
+
+.menu-screen {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #080808;
+}
+
+.menu-canvas {
+  position: relative;
+  width: min(100vw, calc(100dvh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+/* Illustrator background with embedded branding */
+
+.menu-background {
+  position: absolute;
+  inset: 0;
+  background-image: url("./background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.menu-content {
+  position: absolute;
+  inset: 0;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================================
+   MENU SECTION POSITIONS
+   ========================================= */
+
+.coffee-position {
+  position: absolute;
+  top: 7%;
+  left: 3%;
+  width: 33%;
+}
+
+.espresso-position {
+  position: absolute;
+  top: 38%;
+  left: 3%;
+  width: 33%;
+}
+
+.noncoffee-position {
+  position: absolute;
+  top: 7%;
+  right: 3%;
+  width: 33%;
+}
+
+.syrups-position {
+  position: absolute;
+  top: 65%;
+  left: 41%;
+  width: 30%;
+}
+
+.addons-position {
+  position: absolute;
+  top: 65%;
+  right: 4%;
+  width: 23%;
+}
+
+/* =========================================
+   SECTION HEADINGS
+   ========================================= */
+
+.menu-section-title {
+  margin: 0 0 1.17cqw;
+  color: #f0ba70;
+  font-family: Georgia, serif;
+  font-size: 2.8cqw;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.syrups-position .menu-section-title {
+  margin-bottom: 1cqw;
+  font-size: 2.1cqw;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.addons-position .menu-section-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5cqw;
+  margin-bottom: 1cqw;
+  font-size: 2.1cqw;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+/* =========================================
+   MENU ITEMS AND PRICES
+   ========================================= */
+
+.menu-section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.54cqw;
+}
+
+.menu-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 0.25cqw;
+}
+
+.menu-item-name {
+  font-size: 1.7cqw;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.menu-item-prices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 0.29cqw;
+  width: 7.5cqw;
+  flex-shrink: 0;
+}
+
+.menu-price {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.menu-price-dollars {
+  font-size: 1.7cqw;
+}
+
+.menu-price-cents {
+  margin-top: 0.1em;
+  font-size: 0.9cqw;
+}
+
+/* =========================================
+   SYRUPS AND ADD-ONS
+   ========================================= */
+
+.menu-description {
+  margin: 0;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.65cqw;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.syrups-position .menu-description,
+.addons-position .menu-description {
+  font-size: 1.65cqw;
+  line-height: 1.35;
+  text-transform: lowercase;
+}
+
+.addons-price {
+  margin-left: 0;
+  font-size: 1em;
+  white-space: nowrap;
+}
