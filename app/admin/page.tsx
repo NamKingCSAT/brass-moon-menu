@@ -6,6 +6,7 @@ import SignOutButton from "@/components/SignOutButton";
 import AdminMenuItem from "@/components/AdminMenuItem";
 import PublishMenuButton from "@/components/PublishMenuButton";
 import AvailabilityToggle from "@/components/AvailabilityToggle";
+import { connection } from "next/server";
 
 async function AdminContent() {
   const menu = await prisma.menu.findUnique({
@@ -83,6 +84,9 @@ async function AdminContent() {
 }
 
 async function ProtectedAdmin() {
+  // Run authentication only when a real request arrives.
+  await connection();
+
   const session = await auth();
 
   const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
