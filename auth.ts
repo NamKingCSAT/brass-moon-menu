@@ -14,14 +14,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return false;
       }
 
-      const email = profile?.email?.toLowerCase();
-      const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+      const email = profile?.email?.trim().toLowerCase();
+
+      const allowedEmails = [
+        process.env.ADMIN_EMAIL,
+        ...(process.env.ALLOWED_USER_EMAILS ?? "").split(","),
+      ]
+        .map((value) => value?.trim().toLowerCase())
+        .filter(Boolean);
 
       return (
         profile?.email_verified === true &&
         !!email &&
-        !!adminEmail &&
-        email === adminEmail
+        allowedEmails.includes(email)
       );
     },
   },
