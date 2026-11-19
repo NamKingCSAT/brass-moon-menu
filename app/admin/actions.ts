@@ -1,22 +1,16 @@
 "use server";
 
-import { auth } from "@/auth";
+import { requireMenuAccess } from "@/lib/menu-access";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { connection } from "next/server";
+
 export async function updateMenuItem(
   itemId: string,
   name: string,
   prices: { id: string; amount: number }[],
 ) {
-  const session = await auth();
-
-  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
-  const userEmail = session?.user?.email?.trim().toLowerCase();
-
-  if (!adminEmail || !userEmail || userEmail !== adminEmail) {
-    throw new Error("Unauthorized");
-  }
+  await requireMenuAccess();
 
   const trimmedName = name.trim();
 
@@ -81,15 +75,7 @@ export async function updateMenuItem(
 }
 
 export async function publishMenu() {
-  const session = await auth();
-
-  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
-  const userEmail = session?.user?.email?.trim().toLowerCase();
-
-  if (!adminEmail || !userEmail || userEmail !== adminEmail) {
-    throw new Error("Unauthorized");
-  }
-
+  await requireMenuAccess();
   await connection();
 
   const version = await prisma.$transaction(async (tx) => {
@@ -204,14 +190,7 @@ export async function setMenuItemAvailability(
   itemId: string,
   isAvailable: boolean,
 ) {
-  const session = await auth();
-
-  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
-  const userEmail = session?.user?.email?.trim().toLowerCase();
-
-  if (!adminEmail || !userEmail || userEmail !== adminEmail) {
-    throw new Error("Unauthorized");
-  }
+  await requireMenuAccess();
 
   if (
     typeof itemId !== "string" ||

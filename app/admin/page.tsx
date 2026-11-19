@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
+import { isAllowedMenuEmail } from "@/lib/menu-access";
 import { redirect } from "next/navigation";
 import SignOutButton from "@/components/SignOutButton";
 import AdminMenuItem from "@/components/AdminMenuItem";
@@ -89,10 +90,7 @@ async function ProtectedAdmin() {
 
   const session = await auth();
 
-  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
-  const userEmail = session?.user?.email?.trim().toLowerCase();
-
-  if (!adminEmail || !userEmail || userEmail !== adminEmail) {
+  if (!isAllowedMenuEmail(session?.user?.email)) {
     redirect("/api/auth/signin");
   }
 
