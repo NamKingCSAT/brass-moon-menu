@@ -571,3 +571,227 @@ body:has(.menu-screen)::-webkit-scrollbar,
 .menu-canvas {
   overflow: hidden;
 }
+
+/* =========================================
+   BRASS MOON — MOBILE ADMIN LAYOUT
+   ========================================= */
+
+@media (max-width: 800px) {
+  .admin-container {
+    padding: 16px;
+    overflow-x: hidden;
+  }
+
+  .admin-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .admin-header h1 {
+    font-size: 24px;
+  }
+
+  .admin-header-actions {
+    gap: 10px;
+  }
+
+  .admin-section {
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .admin-section h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .admin-items {
+    gap: 0;
+  }
+
+  /* Each product gets its own compact card */
+  .admin-product-row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 14px 0;
+    border-bottom: 1px solid #383838;
+    min-width: 0;
+  }
+
+  .admin-product-row:last-child {
+    border-bottom: none;
+  }
+
+  .admin-product-row .admin-edit-item {
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+  }
+
+  /* Product name, prices and Save button */
+  .admin-edit-fields {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    align-items: stretch;
+    min-width: 0;
+  }
+
+  .admin-edit-name {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .admin-edit-prices {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .admin-edit-prices label {
+    width: auto;
+    min-width: 0;
+  }
+
+  .admin-edit-fields input {
+    min-width: 0;
+    width: 100%;
+    padding: 10px 8px;
+    font-size: 16px;
+  }
+
+  /* Compact action buttons */
+  .admin-save-button {
+    justify-self: end;
+    padding: 9px 18px;
+    font-size: 14px;
+  }
+
+  .admin-availability {
+    align-self: flex-end;
+    max-width: 100%;
+  }
+
+  .availability-button {
+    min-width: 110px;
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  /* Keep notifications within phone width */
+  .admin-publish-toast,
+  .admin-availability-toast {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    max-width: calc(100vw - 24px);
+  }
+}
+
+@media (max-width: 380px) {
+  .admin-container {
+    padding: 10px;
+  }
+
+  .admin-section {
+    padding: 10px;
+  }
+
+  .admin-edit-prices {
+    gap: 6px;
+  }
+}
+
+/* =========================================
+   BRASS MOON — COMPACT MOBILE ADMIN
+   ========================================= */
+
+@media (max-width: 800px) {
+  .admin-section {
+    padding: 12px;
+    margin-bottom: 14px;
+  }
+
+  .admin-section h2 {
+    margin-bottom: 8px;
+  }
+
+  /* Use a shared grid for editing and availability */
+  .admin-product-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 10px;
+    padding: 12px 0;
+    align-items: center;
+  }
+
+  /* Allow nested controls to participate in the grid */
+  .admin-product-row .admin-edit-item,
+  .admin-product-row .admin-edit-fields {
+    display: contents;
+  }
+
+  /* Product name across full width */
+  .admin-product-row .admin-edit-name {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* Three price fields across full width */
+  .admin-product-row .admin-edit-prices {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    gap: 8px;
+    width: 100%;
+  }
+
+  /* Save on left */
+  .admin-product-row .admin-save-button {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: start;
+    padding: 9px 16px;
+    font-size: 13px;
+  }
+
+  /* Availability on right */
+  .admin-product-row .admin-availability {
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: end;
+    align-self: center;
+  }
+
+  .admin-product-row .availability-button {
+    min-width: 105px;
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  /* Save feedback below action buttons */
+  .admin-product-row .admin-edit-message {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    margin: 0;
+  }
+
+  /* Keep input fields compact */
+  .admin-edit-name,
+  .admin-edit-prices label {
+    gap: 5px;
+  }
+
+  .admin-edit-fields input {
+    padding: 9px;
+  }
+}
